@@ -6,8 +6,6 @@ import webbrowser
 import os
 import random
 
-
-
 #FOR voice this is made
 def speak(audio):
     speak=Dispatch('SAPI.Spvoice')
@@ -17,10 +15,8 @@ def greet():
     hour=int(datetime.datetime.now().hour)
     if hour>=0 and hour<12:
         speak("Good morning sir")
-    
     elif hour>=12 and hour<16:
         speak("Good afternoon Sir")
-    
     else:
         speak("Good evening sir")
     
@@ -28,7 +24,6 @@ def greet():
 
 #To carry out tasks tk command is made to hear
 def tk_cmd():
-    
     r=sr.Recognizer()
     with sr.Microphone() as source:
         print("\nListening .....")
@@ -37,23 +32,16 @@ def tk_cmd():
         audio=r.listen(source)
     
     #To handle any kind of mess like exception try is being used like not heard
-    
     try:
         print("\nRecognizing.....")
         #recognize_google() is used for search engine
         query=r.recognize_google(audio, language="en-IN")
         print(query,"\n")
-        
     except Exception as e:
-        
-        
-        speak("Please repeat again sir")
+        speak("Please repeat again")
         return "none"
     return query
         
-        
-
-
 if __name__=='__main__':
     greet()
     query=tk_cmd().lower()
@@ -85,4 +73,3 @@ if __name__=='__main__':
     elif 'time' in query:
         stime=datetime.datetime.now().strftime("%H:%M:%S")
         speak(f"Sir the time is {stime}")
-    
